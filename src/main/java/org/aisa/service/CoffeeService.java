@@ -1,21 +1,22 @@
 package org.aisa.service;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.aisa.entity.Coffee;
 import org.aisa.repo.CoffeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Transactional
 public class CoffeeService {
-    private final CoffeeRepository coffeeRepository;
-
-    @Autowired
-    public CoffeeService(CoffeeRepository coffeeRepository) {
-        this.coffeeRepository = coffeeRepository;
-    }
+    CoffeeRepository coffeeRepository;
 
     public List<Coffee> getAllCoffee() {
         return coffeeRepository.findAll();

@@ -1,22 +1,22 @@
 package org.aisa.service;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.aisa.entity.Ingredient;
-import org.aisa.model.IngredientRequest;
 import org.aisa.repo.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Transactional
 public class IngredientService {
-
-    private final IngredientRepository ingredientRepository;
-
-    @Autowired
-    public IngredientService(IngredientRepository ingredientRepository) {
-        this.ingredientRepository = ingredientRepository;
-    }
+    IngredientRepository ingredientRepository;
 
     public List<Ingredient> getIngredients() {
         return ingredientRepository.findAll();
